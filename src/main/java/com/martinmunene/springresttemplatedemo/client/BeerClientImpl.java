@@ -52,4 +52,13 @@ public class BeerClientImpl implements BeerClient {
 
         return restTemplate.getForObject(GET_BEER_BY_ID_PATH, BeerDTO.class, id);
     }
+
+    @Override
+    public BeerDTO createBeer(BeerDTO newDto) {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+
+        ResponseEntity<BeerDTO> response = restTemplate.postForEntity(GET_BEER_PATH, newDto, BeerDTO.class);
+
+        return null;
+    }
 }
