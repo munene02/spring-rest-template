@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.UUID;
 
 /**
@@ -57,8 +58,8 @@ public class BeerClientImpl implements BeerClient {
     public BeerDTO createBeer(BeerDTO newDto) {
         RestTemplate restTemplate = restTemplateBuilder.build();
 
-        ResponseEntity<BeerDTO> response = restTemplate.postForEntity(GET_BEER_PATH, newDto, BeerDTO.class);
+        URI uri = restTemplate.postForLocation(GET_BEER_PATH, newDto);
 
-        return null;
+        return restTemplate.getForObject(uri.getPath(), BeerDTO.class);
     }
 }
